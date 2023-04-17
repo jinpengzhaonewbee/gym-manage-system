@@ -9232,6 +9232,7 @@ textarea.form-control-lg {
 
   .me-lg-0 {
     margin-right: 0 !important;
+    margin-left: 10px !important;
   }
 
   .me-lg-1 {
@@ -11262,4 +11263,11 @@ body {
   width: 20px !important;
   font-size: 0.75rem;
   border-radius: 0.25rem !important;
+}
+.abcd{
+  vertical-align: -.125em;
+  filter : grayscale(100%) opacity(.5);
+  -webkit-filter : grayscale(100%) opacity(.5);
+  width: 0.875em;
+  height: 0.9rem;
 }
