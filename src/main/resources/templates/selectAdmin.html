@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="adminCommon::common-header"></head>
+<body class="sb-nav-fixed">
+<nav th:replace="adminCommon::common-navbar"></nav>
+<div id="layoutSidenav">
+  <div th:replace="adminCommon::common-sidenav"></div>
+
+  <div id="layoutSidenav_content">
+    <main>
+      <div class="container-fluid px-4">
+        <h1 class="mt-4">系统管理</h1>
+
+        <ol class="breadcrumb mb-4">
+          <li class="breadcrumb-item"><a th:href="@{/toAdminMain}">主页</a></li>
+          <li class="breadcrumb-item active">系统管理</li>
+        </ol>
+
+        <div class="card mb-4">
+          <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            管理员信息表
+          </div>
+          <div class="card-body">
+            <table id="datatablesSimple">
+              <thead>
+              <tr>
+                <th>管理员账号</th>
+                <th>密码</th>
+                <th>状态(0:禁用;1:可用)</th>
+                <th>备注</th>
+                <th>操作</th>
+
+              </tr>
+              </thead>
+
+              <tbody>
+              <tr th:each="adm:${adminList}">
+                <td th:text="${adm.adminAccount}">管理员账号</td>
+                <td th:text="${adm.adminPassword}">密码</td>
+                <td th:text="${adm.adminState}">状态</td>
+                <td th:text="${adm.adminMessage}">备注</td>
+                <td>
+                  <a th:href="@{/admin/toUpdateAdmin(adminAccount=${adm.adminAccount})}"
+                     style="text-decoration: none">
+                    <input type="button" class="btn btn-sm btn-outline-primary" value="编辑">
+                  </a>
+                  <a th:href="@{/admin/delAdmin(adminAccount=${adm.adminAccount})}"
+                     style="text-decoration: none">
+                    <input type="button" class="btn btn-sm btn-outline-danger"
+                           onclick="return del()" value="删除">
+                  </a>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div style="text-align:center;margin-top:20px;margin-bottom:20px">
+          <a th:href="@{/admin/toAddAdmin}">
+            <input type="button" class="btn btn-outline-success" value="添加管理员信息">
+          </a>
+        </div>
+      </div>
+    </main>
+    <footer th:replace="adminCommon::common-footer"></footer>
+  </div>
+</div>
+
+<div th:include="adminCommon::common-scripts"></div>
+<script>
+  function del() {
+    let msg = "确定要删除吗？";
+    if (confirm(msg) == true) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+</script>
+</body>
+</html>

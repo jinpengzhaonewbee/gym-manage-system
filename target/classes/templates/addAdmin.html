@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="adminCommon::common-header">
+    <meta charset="UTF-8"/>
+</head>
+<body class="sb-nav-fixed">
+<nav th:replace="adminCommon::common-navbar"></nav>
+<div id="layoutSidenav">
+    <div th:replace="adminCommon::common-sidenav"></div>
+
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">添加管理员</h1>
+
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a th:href="@{/toAdminMain}">主页</a></li>
+                    <li class="breadcrumb-item"><a th:href="@{/equipment/selEquipment}">系统管理</a></li>
+                    <li class="breadcrumb-item active">添加管理员</li>
+                </ol>
+
+                <div class="card mb-4">
+
+                    <form th:action="@{/admin/addAdmin}" method="post" name="addForm"
+                          onsubmit="return beforeSubmit(this)">
+                        <table class="table table-hover">
+                            <tr>
+                                <td text-align="center">管理员账号：</td>
+                                <td><input type="text" class="form-control" placeholder="账号（四位数字）" name="adminAccount"></td>
+                            </tr>
+
+                            <tr>
+                                <td text-align="center">管理员密码：</td>
+                                <td><input type="text" class="form-control" placeholder="密码（四位数字）" name="adminPassword">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td text-align="center">状态：</td>
+                                <td><input type="text" class="form-control" placeholder="状态(0:禁用;1:可用)" name="adminState">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td text-align="center">备注信息：</td>
+                                <td><input type="text" class="form-control" placeholder="备注" name="adminMessage">
+                                </td>
+                            </tr>
+                        </table>
+                        <div style="text-align:center;margin-top:20px;margin-bottom:20px">
+                            <input type="submit" class="btn btn-outline-success" value="添加">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+        <footer th:replace="adminCommon::common-footer"></footer>
+    </div>
+</div>
+
+<div th:include="adminCommon::common-scripts"></div>
+<script type="text/javascript">
+    function beforeSubmit(addForm) {
+        if (addForm.adminAccount.value == "") {
+            alert("请输入管理员账号：")
+            return false;
+        }
+        if (addForm.adminPassword.value == "") {
+            alert("请输入密码：")
+            return false;
+        }
+        if (addForm.adminState.value == "") {
+            alert("请输入账号状态！")
+            return false;
+        }
+        if (addForm.adminMessage.value == "") {
+            alert("请输入备注信息！")
+            return false;
+        }
+        return true;
+    }
+</script>
+</body>
+</html>
